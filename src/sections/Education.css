@@ -1,0 +1,210 @@
+.education {
+    background: var(--color-bg-secondary);
+}
+
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3xl);
+}
+
+.timeline-section {
+    width: 100%;
+}
+
+.timeline-heading {
+    font-size: 1.75rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid rgba(99, 102, 241, 0.2);
+}
+
+.heading-icon {
+    font-size: 2rem;
+}
+
+.timeline {
+    position: relative;
+    padding-left: var(--spacing-2xl);
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--gradient-primary);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: var(--spacing-xl);
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -36px;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-bg-primary);
+    border: 3px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: var(--shadow-md);
+}
+
+.marker-icon {
+    font-size: 1.25rem;
+}
+
+.timeline-content {
+    margin-left: var(--spacing-lg);
+    transition: all var(--transition-normal);
+}
+
+.timeline-content:hover {
+    transform: translateX(10px);
+}
+
+.timeline-period {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+}
+
+.timeline-title {
+    font-size: 1.35rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.timeline-institution {
+    color: var(--color-primary-light);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+}
+
+.timeline-description {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+}
+
+.responsibilities {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-md);
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--color-accent);
+}
+
+.responsibilities h5 {
+    font-size: 1rem;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-sm);
+}
+
+.responsibilities ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.responsibilities li {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    padding: 0.375rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.responsibilities li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-weight: bold;
+}
+
+.timeline-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .timeline {
+        padding-left: var(--spacing-lg);
+    }
+
+    .timeline::before {
+        left: 12px;
+    }
+
+    .timeline-marker {
+        left: -28px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .marker-icon {
+        font-size: 1rem;
+    }
+
+    .timeline-content {
+        margin-left: var(--spacing-md);
+    }
+
+    .timeline-heading {
+        font-size: 1.5rem;
+    }
+
+    .timeline-title {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .timeline {
+        padding-left: var(--spacing-md);
+    }
+
+    .timeline-marker {
+        left: -20px;
+        width: 28px;
+        height: 28px;
+    }
+
+    .marker-icon {
+        font-size: 0.875rem;
+    }
+
+    .timeline-content {
+        margin-left: var(--spacing-sm);
+    }
+
+    .responsibilities {
+        padding: var(--spacing-sm);
+    }
+}
