@@ -16,7 +16,7 @@ export const personalInfo = {
     email: "mailto:Rahmach1222@gmail.com"
   },
 
-  cvFile: "/CV rahma chriha.pdf"
+  cvFile: "/cv_rahma_chriha.pdf"
 };
 
 export const education = [
