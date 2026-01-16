@@ -13,7 +13,7 @@ function About() {
                     <div className="about-image">
                         <div className="about-image-wrapper">
                             <div className="about-avatar">
-                                <span className="about-initials">RC</span>
+                                <img src={personalInfo.profileImage} alt={personalInfo.name} className="profile-photo" />
                             </div>
                             <div className="about-decoration"></div>
                         </div>

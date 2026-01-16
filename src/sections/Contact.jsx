@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { contact } from '../data/portfolioData';
+import { contact, personalInfo } from '../data/portfolioData';
 import './Contact.css';
 
 function Contact() {
@@ -99,7 +99,7 @@ function Contact() {
                         </div>
 
                         <div className="cv-download">
-                            <a href="/CV rahma chriha.pdf" download className="btn btn-primary">
+                            <a href={personalInfo.cvFile} download className="btn btn-primary">
                                 📥 Télécharger mon CV
                             </a>
                         </div>
