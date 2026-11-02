@@ -1,85 +1,100 @@
+import { personal, navLinks, contactInfo } from '../data/portfolioData';
+import { useLang, t } from '../context/LangContext';
+import { IconGitHub, IconLinkedIn, IconMail } from './Icons';
 import './Footer.css';
 
-function Footer() {
-    const currentYear = new Date().getFullYear();
+export default function Footer() {
+  const { lang } = useLang();
+  const year = new Date().getFullYear();
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
-    return (
-        <footer className="footer">
-            <div className="container">
-                <div className="footer-content">
-                    <div className="footer-section">
-                        <h3 className="footer-title">Rahma Chriha</h3>
-                        <p className="footer-text">
-                            Étudiante en Génie Logiciel passionnée par le développement Full-Stack
-                            et la création d'applications web innovantes.
-                        </p>
-                    </div>
+  return (
+    <footer className="footer" role="contentinfo">
+      <div className="container footer-inner">
+        <div className="footer-brand">
+          <div className="footer-monogram">RC</div>
+          <div>
+            <p className="footer-name">{personal.name}</p>
+            <p className="footer-role">{t(personal.title, lang)}</p>
+          </div>
+        </div>
 
-                    <div className="footer-section">
-                        <h4 className="footer-subtitle">Navigation</h4>
-                        <div className="footer-links">
-                            <a href="#home" className="footer-link">Accueil</a>
-                            <a href="#about" className="footer-link">À propos</a>
-                            <a href="#skills" className="footer-link">Compétences</a>
-                            <a href="#projects" className="footer-link">Projets</a>
-                            <a href="#contact" className="footer-link">Contact</a>
-                        </div>
-                    </div>
+        <nav className="footer-nav" aria-label="Footer navigation">
+          {navLinks.map(link => (
+            <button
+              key={link.id}
+              id={`footer-nav-${link.id}`}
+              className="footer-nav-link"
+              onClick={() => scrollTo(link.id)}
+            >
+              {t(link.label, lang)}
+            </button>
+          ))}
+        </nav>
 
-                    <div className="footer-section">
-                        <h4 className="footer-subtitle">Réseaux Sociaux</h4>
-                        <div className="footer-socials">
-                            <a
-                                href="https://github.com/rahmachriha"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="social-link"
-                                aria-label="GitHub"
-                            >
-                                <span className="social-icon">📦</span>
-                                GitHub
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/rahma-chriha"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="social-link"
-                                aria-label="LinkedIn"
-                            >
-                                <span className="social-icon">💼</span>
-                                LinkedIn
-                            </a>
-                            <a
-                                href="mailto:rahma.chriha@example.com"
-                                className="social-link"
-                                aria-label="Email"
-                            >
-                                <span className="social-icon">📧</span>
-                                Email
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        <div className="footer-socials">
+          <a
+            id="footer-github"
+            href={contactInfo.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-social-link"
+            aria-label="GitHub"
+          >
+            <IconGitHub size={18} />
+          </a>
+          <a
+            id="footer-linkedin"
+            href={contactInfo.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-social-link"
+            aria-label="LinkedIn"
+          >
+            <IconLinkedIn size={18} />
+          </a>
+          <a
+            id="footer-email"
+            href={`mailto:${contactInfo.email}`}
+            className="footer-social-link"
+            aria-label="Email"
+          >
+            <IconMail size={18} />
+          </a>
+          <a
+            id="footer-cv-fr"
+            href={contactInfo.cvFr}
+            download="CV_Rahma_Chriha_FR.pdf"
+            className="footer-social-link footer-cv-badge"
+            aria-label="CV Français (PDF)"
+            title="Télécharger le CV (Français)"
+          >
+            CV FR
+          </a>
+          <a
+            id="footer-cv-en"
+            href={contactInfo.cvEn}
+            download="CV_Rahma_Chriha_EN.pdf"
+            className="footer-social-link footer-cv-badge"
+            aria-label="CV English (PDF)"
+            title="Download CV (English)"
+          >
+            CV EN
+          </a>
+        </div>
+      </div>
 
-                <div className="footer-bottom">
-                    <p className="footer-copyright">
-                        © {currentYear} Rahma Chriha. Tous droits réservés.
-                    </p>
-                    <button
-                        className="scroll-top-btn"
-                        onClick={scrollToTop}
-                        aria-label="Retour en haut"
-                    >
-                        ↑
-                    </button>
-                </div>
-            </div>
-        </footer>
-    );
+      <div className="footer-bottom">
+        <div className="container">
+          <p className="footer-copy">
+            © {year} {personal.name}. {lang === 'en' ? 'Built with' : 'Conçu avec'} React + Vite.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
 }
-
-export default Footer;

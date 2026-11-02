@@ -1,99 +1,58 @@
 import { skills } from '../data/portfolioData';
-import SkillBar from '../components/SkillBar';
+import { useLang, t } from '../context/LangContext';
+import { useReveal } from '../hooks/useReveal';
 import './Skills.css';
 
-function Skills() {
-    return (
-        <section id="skills" className="section skills">
-            <div className="container">
-                <div className="section-title">
-                    <h2>Compétences</h2>
-                    <p className="section-subtitle">
-                        Technologies et outils que je maîtrise pour créer des solutions performantes
-                    </p>
-                </div>
-
-                <div className="skills-grid">
-                    {/* Languages */}
-                    <div className="skill-category">
-                        <h3 className="category-title">
-                            <span className="category-icon">💻</span>
-                            Langages de Programmation
-                        </h3>
-                        <div className="skill-list">
-                            {skills.languages.map((skill, index) => (
-                                <SkillBar key={skill.name} skill={skill} delay={index * 100} />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Frameworks */}
-                    <div className="skill-category">
-                        <h3 className="category-title">
-                            <span className="category-icon">⚙️</span>
-                            Frameworks & Bibliothèques
-                        </h3>
-                        <div className="skill-list">
-                            {skills.frameworks.map((skill, index) => (
-                                <SkillBar key={skill.name} skill={skill} delay={index * 100} />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Databases */}
-                    <div className="skill-category">
-                        <h3 className="category-title">
-                            <span className="category-icon">🗄️</span>
-                            Bases de Données
-                        </h3>
-                        <div className="skill-list">
-                            {skills.databases.map((skill, index) => (
-                                <SkillBar key={skill.name} skill={skill} delay={index * 100} />
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* Tools */}
-                    <div className="skill-category">
-                        <h3 className="category-title">
-                            <span className="category-icon">🛠️</span>
-                            Outils & Technologies
-                        </h3>
-                        <div className="skill-list">
-                            {skills.tools.map((skill, index) => (
-                                <SkillBar key={skill.name} skill={skill} delay={index * 100} />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Methodologies & Languages Spoken */}
-                <div className="additional-skills">
-                    <div className="skill-badges">
-                        <h4 className="badges-title">Méthodologies</h4>
-                        <div className="badges-list">
-                            {skills.methodologies.map((method) => (
-                                <span key={method.name} className="badge badge-primary">
-                                    {method.icon} {method.name}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="skill-badges">
-                        <h4 className="badges-title">Langues Parlées</h4>
-                        <div className="badges-list">
-                            {skills.languages_spoken.map((lang) => (
-                                <span key={lang.name} className="badge badge-accent">
-                                    {lang.flag} {lang.name}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+function SkillCategory({ category, lang, delay }) {
+  const ref = useReveal(0.08);
+  return (
+    <div ref={ref} className={`skill-cat card reveal reveal-delay-${delay}`}>
+      <div className="skill-cat-header">
+        <div className="skill-cat-icon" aria-hidden>{category.icon}</div>
+        <h3 className="skill-cat-name">{t(category.category, lang)}</h3>
+      </div>
+      <div className="skill-cat-items">
+        {category.items.map(item => (
+          <span key={item} className="tag tag-neutral skill-item">{item}</span>
+        ))}
+      </div>
+    </div>
+  );
 }
 
-export default Skills;
+export default function Skills() {
+  const { lang } = useLang();
+  const headerRef = useReveal(0.1);
+
+  return (
+    <section id="skills" className="section skills">
+      <div className="container">
+
+        <div ref={headerRef} className="section-header reveal">
+          <span className="section-eyebrow">
+            {lang === 'en' ? 'Skills' : 'Compétences'}
+          </span>
+          <h2 className="section-title">
+            {lang === 'en' ? 'Technical Skills' : 'Compétences techniques'}
+          </h2>
+          <p className="section-desc">
+            {lang === 'en'
+              ? 'Technologies and tools I have used across my projects and studies.'
+              : "Technologies et outils utilisés dans mes projets et au cours de mes études."}
+          </p>
+        </div>
+
+        <div className="skills-grid">
+          {skills.map((cat, i) => (
+            <SkillCategory
+              key={i}
+              category={cat}
+              lang={lang}
+              delay={(i % 4) + 1}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
